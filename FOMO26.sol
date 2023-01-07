@@ -11,11 +11,11 @@ contract FOMO26 is ERC721Enumerable, Ownable {
 
 	string _baseTokenURI;
 
-    uint256 NFTprice = 7 ether;
+	uint256 NFTprice = 7 ether;
 
 	uint256 public maxTokenIds = 26;
 	uint256 public tokenIds;
-    uint256 public deployedTimestamp;
+	uint256 public deployedTimestamp;
 	bool startMint = false;
 
 	address withdrawWallet;
@@ -23,7 +23,7 @@ contract FOMO26 is ERC721Enumerable, Ownable {
 	constructor () ERC721("FOMO26", "FOMO26") {
 		_baseTokenURI = "x";
 		withdrawWallet = address(0);
-        deployedTimestamp = block.timestamp;
+		deployedTimestamp = block.timestamp;
 	}
 
 	function startMintFunc() public onlyOwner {
@@ -41,21 +41,21 @@ contract FOMO26 is ERC721Enumerable, Ownable {
 		return bytes(baseURI).length > 0 ? string(abi.encodePacked(baseURI, tokenId.toString(), ".json")) : "";
 	}
 
-    function getTimestamp() public view returns (uint256) {
-        return block.timestamp;
-    }
+	function getTimestamp() public view returns (uint256) {
+		return block.timestamp;
+	}
 
-    function getPrice() public view returns (uint256) {
+	function getPrice() public view returns (uint256) {
 
-        uint256 newTime = block.timestamp - deployedTimestamp;
-        uint256 priceToSubtract = 0.00001 ether * newTime;
-        if(NFTprice <= priceToSubtract) {
-            return 0;
-        } else {
-        uint256 price = NFTprice - priceToSubtract;
-        return(price);
-        }
-    }
+		uint256 newTime = block.timestamp - deployedTimestamp;
+		uint256 priceToSubtract = 0.00001 ether * newTime;
+		if(NFTprice <= priceToSubtract) {
+			return 0;
+		} else {
+		uint256 price = NFTprice - priceToSubtract;
+		return(price);
+		}
+	}
 
 	function mintLetter() public payable {
 		require(startMint, "Mint not active");
